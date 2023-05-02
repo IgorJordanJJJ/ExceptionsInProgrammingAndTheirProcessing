@@ -1,0 +1,29 @@
+В коде есть две проблемы:
+
+Блок перехвата IndexOutOfBoundsException должен быть перед блоком перехвата Throwable, поскольку это более специфический тип исключения.
+
+Метод printSum объявляет, что выбрасывает исключение FileNotFoundException, но на самом деле он не выбрасывает это исключение. Поэтому пункт throws FileNotFoundException в сигнатуре метода является лишним.
+
+Исправленный код показан ниже:
+public static void main(String[] args) {
+   try {
+       int a = 90;
+       int b = 3;
+       System.out.println(a / b);
+       int[] abc = { 1, 2 };
+       abc[3] = 9;
+       printSum(23, 234);
+   } catch (NullPointerException ex) {
+       System.out.println("The pointer cannot point to null!");
+   } catch (IndexOutOfBoundsException ex) {
+       System.out.println("The array exceeds its size!");
+   } catch (Throwable ex) {
+       System.out.println("Something went wrong...");
+   }
+}
+
+public static void printSum(Integer a, Integer b) {
+   System.out.println(a + b);
+}
+
+Обратите внимание, что мы также изменили порядок операторов внутри блока try, чтобы исключение IndexOutOfBoundsException произошло до вызова printSum().

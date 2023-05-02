@@ -1,0 +1,8 @@
+Приведенный код пытается разделить целое число на ноль, что вызовет исключение ArithmeticException. Однако код некорректен, поскольку в нем отсутствует блок try-catch. Исправленный код показан ниже:
+try {
+   int d = 0;
+   double catchedRes1 = intArray[8] / d;
+   System.out.println("catchedRes1 = " + catchedRes1);
+} catch (ArithmeticException e) {
+   System.out.println("Catching exception: " + e);
+}
